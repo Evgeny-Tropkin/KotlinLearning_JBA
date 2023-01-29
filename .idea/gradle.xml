@@ -12,6 +12,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Topics/Relational operators/Are the numbers different" />
+            <option value="$PROJECT_DIR$/Topics/Relational operators/Theory" />
             <option value="$PROJECT_DIR$/Version Control System/task" />
             <option value="$PROJECT_DIR$/Version Control System/task/build/classes/kotlin" />
             <option value="$PROJECT_DIR$/Version Control System/task/build/reports/tests" />
