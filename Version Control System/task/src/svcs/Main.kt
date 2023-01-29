@@ -11,6 +11,7 @@ fun main() {
     val helpArgumentValue = readln()
     if (helpArgumentValue in helpContent) println(helpContent[helpArgumentValue])
     else if (helpArgumentValue == "--help" || helpArgumentValue.isEmpty()) printHelp(helpContent)
+    else println("'$helpArgumentValue' addis not a SVCS command.")
 }
 
 fun printHelp(content: Map<String, String>) {
