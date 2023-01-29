@@ -1,6 +1,6 @@
 package svcs
 
-fun main() {
+fun main(args: Array<String>) {
     val helpContent = mapOf(
         "config" to "Get and set a username.",
         "add" to "Add a file to the index.",
@@ -8,7 +8,7 @@ fun main() {
         "commit" to "Save changes.",
         "checkout" to "Restore a file."
     )
-    val helpArgumentValue = readln()
+    val helpArgumentValue = if (args.isNotEmpty()) args[0] else ""
     if (helpArgumentValue in helpContent) println(helpContent[helpArgumentValue])
     else if (helpArgumentValue == "--help" || helpArgumentValue.isEmpty()) printHelp(helpContent)
     else println("'$helpArgumentValue' addis not a SVCS command.")
