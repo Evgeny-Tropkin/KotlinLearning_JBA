@@ -12,6 +12,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Topics/Integers in action/Declaring Long" />
+            <option value="$PROJECT_DIR$/Topics/Integers in action/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Integers in action/Time format" />
             <option value="$PROJECT_DIR$/Topics/Relational operators/Are the numbers different" />
             <option value="$PROJECT_DIR$/Topics/Relational operators/Theory" />
             <option value="$PROJECT_DIR$/Version Control System/task" />
