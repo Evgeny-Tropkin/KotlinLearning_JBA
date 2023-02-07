@@ -1,5 +1,4 @@
-type: choice
-is_multiple_choice: false
+type: theory
 files:
 - name: src/Main.kt
   visible: true
@@ -10,7 +9,7 @@ files:
       // put your code here
     }
   learner_created: false
-feedback_link: https://hyperskill.org/learn/step/4428#comment
+feedback_link: https://hyperskill.org/learn/step/4625#comment
 status: Solved
 record: -1
-local_check: false
+post_submission_on_open: true

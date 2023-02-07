@@ -1,5 +1,11 @@
 type: choice
 is_multiple_choice: false
+options:
+- text: 4
+- text: 125
+- text: 45
+- text: 1245
+- text: 135
 files:
 - name: src/Main.kt
   visible: true
@@ -10,7 +16,7 @@ files:
       // put your code here
     }
   learner_created: false
-feedback_link: https://hyperskill.org/learn/step/4428#comment
+feedback_link: https://hyperskill.org/learn/step/5961#comment
 status: Solved
 record: -1
 local_check: false

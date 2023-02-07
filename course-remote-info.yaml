@@ -3,7 +3,7 @@ hyperskill_project:
   ide_files: https://stepik.org/media/attachments/lesson/526012/additional_files.json
   is_template_based: false
   use_ide: true
-update_date: "Sun, 05 Feb 2023 05:07:08 UTC"
+update_date: "Tue, 07 Feb 2023 18:11:17 UTC"
 stages:
 - id: 909
   step: 13042
@@ -49,7 +49,7 @@ topics:
     theory_id: 4425
   - title: Invoking functions
     theory_id: 4575
-  - title: Standard input
+  - title: Standard input with Java Scanner
     theory_id: 4445
   - title: The classification of basic types
     theory_id: 4455
