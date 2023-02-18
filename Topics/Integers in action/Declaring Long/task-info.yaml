@@ -1,5 +1,10 @@
 type: choice
-is_multiple_choice: false
+is_multiple_choice: true
+options:
+- text: <code>val x = giant - magic</code>
+- text: <code>val x = (magic + giant) % 10</code>
+- text: <code>val x = 100L - magic</code>
+- text: <code>val x = magic + magic + 1</code>
 files:
 - name: src/Main.kt
   visible: true
