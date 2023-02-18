@@ -1,3 +1,4 @@
 fun main() {
-    // write your code here
+    val inp = readln().lowercase()
+    println(inp.toBoolean())
 }
