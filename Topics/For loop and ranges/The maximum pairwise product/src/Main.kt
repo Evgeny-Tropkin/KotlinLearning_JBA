@@ -1,5 +1,17 @@
 fun main() {
     val numCount = readln().toInt()
-    val numbers = MutableList(numCount) { readln().toInt() }.sortedDescending()
-    println(if (numCount == 1) numbers[0] else numbers[0] * numbers[1])
+    var maxNum = 1
+    var otherNum = 0
+    repeat(numCount) {
+        val currentNum = readln().toInt()
+        if (currentNum > otherNum) {
+            if (currentNum > maxNum) {
+                otherNum = maxNum
+                maxNum = currentNum
+            } else {
+                otherNum = currentNum
+            }
+        }
+    }
+    println(maxNum * otherNum)
 }
