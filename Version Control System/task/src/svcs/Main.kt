@@ -9,7 +9,7 @@ fun main(args: Array<String>) {
         "checkout" to "   Restore a file."
     )
     val helpArgumentValue = if (args.isNotEmpty()) args[0] else ""
-    if (helpArgumentValue in helpContent) println(helpContent[helpArgumentValue])
+    if (helpArgumentValue in helpContent) println(helpContent[helpArgumentValue]?.trim())
     else if (helpArgumentValue == "--help" || helpArgumentValue.isEmpty()) printHelp(helpContent)
     else println("'$helpArgumentValue' is not a SVCS command.")
 }
