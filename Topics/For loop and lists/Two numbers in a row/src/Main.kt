@@ -1,10 +1,17 @@
 fun main() {
     val size = readln().toInt()
-    val list = MutableList(size) { readln() }.joinToString(" ")
-    val inp = readln().split(' ').map { it.toInt() }
-    println(
-        if (inp.joinToString(" ") in list ||
-            inp.reversed().joinToString(" ") in list
-        ) "NO" else "YES"
-    )
+    val list = MutableList(size) { readln().toInt() }
+    val (x, y) = readln().split(' ').map { it.toInt() }
+
+    for (pos in 0..list.lastIndex) {
+        if (pos == list.lastIndex){
+            println("YES")
+            break
+        }
+        if ((list[pos] == x || list[pos] == y) &&
+            (list[pos] * list[pos + 1] == x * y)) {
+            println("NO")
+            break
+        }
+    }
 }
