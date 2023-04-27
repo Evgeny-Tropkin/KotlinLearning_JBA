@@ -1,0 +1,14 @@
+type: code
+custom_name: Is there a key?
+files:
+- name: src/Main.kt
+  visible: true
+  text: |-
+    fun containsKeyAndValue(map: Map<String, String>, value: String): Boolean {
+        // put your code here
+    }
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/12664#comment
+status: Unchecked
+record: -1
+submission_language: kotlin
