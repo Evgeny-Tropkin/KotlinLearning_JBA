@@ -3,3 +3,8 @@
 /build/
 /.gradle/
 /Version Control System/task/out/
+/gradle/
+build.gradle
+gradlew
+gradlew.bat
+settings.gradle
