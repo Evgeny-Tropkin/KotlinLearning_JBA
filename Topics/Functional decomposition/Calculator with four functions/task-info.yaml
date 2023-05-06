@@ -16,6 +16,9 @@ files:
     fun multiplyTwoNumbers...
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/12673#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Sat, 06 May 2023 02:47:38 UTC"
 record: -1
 submission_language: kotlin
