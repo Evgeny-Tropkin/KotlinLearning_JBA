@@ -7,6 +7,9 @@ files:
     val myFile = File(...)
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/9719#comment
-status: Failed
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Sat, 20 May 2023 05:48:57 UTC"
 record: -1
 submission_language: kotlin
