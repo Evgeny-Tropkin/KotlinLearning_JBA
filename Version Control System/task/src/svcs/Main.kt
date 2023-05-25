@@ -1,17 +1,17 @@
 package svcs
 
 fun main(args: Array<String>) {
-    val helpContent = mapOf(
+    val commands = mapOf(
         "config" to "     Get and set a username.",
         "add" to "        Add a file to the index.",
         "log" to "        Show commit logs.",
         "commit" to "     Save changes.",
         "checkout" to "   Restore a file."
     )
-    val helpArgumentValue = if (args.isNotEmpty()) args[0] else ""
-    if (helpArgumentValue in helpContent) println(helpContent[helpArgumentValue]?.trim())
-    else if (helpArgumentValue == "--help" || helpArgumentValue.isEmpty()) printHelp(helpContent)
-    else println("'$helpArgumentValue' is not a SVCS command.")
+    val argumentValue = if (args.isNotEmpty()) args[0].split(" ") else listOf()
+
+    if (argumentValue.isEmpty() || argumentValue[0] == "--help") printHelp(commands)
+    else println("'$argumentValue' is not a SVCS command.")
 }
 
 fun printHelp(content: Map<String, String>) {
