@@ -13,6 +13,8 @@ fun main(args: Array<String>) {
     val argumentValue = if (args.isNotEmpty()) args[0].split(" ") else listOf()
     val workingDirectory = System.getProperty ("user.dir") + File.separator + "Version Control System"
     val vcsFolder = checkFolder(workingDirectory, "vcs")
+    val configFile = checkFile(vcsFolder, "config.txt")
+    val indexFile = checkFile(vcsFolder, "index.txt")
 
     if (argumentValue.isEmpty() || argumentValue[0] == "--help") printHelp(commands)
     else println("'${argumentValue[0]}' is not a SVCS command.")
@@ -30,4 +32,12 @@ fun checkFolder(path: String, folderName: String): File {
         folder.mkdir()
     }
     return folder
+}
+
+fun checkFile(folder: File, fileName:String): File {
+    val file = folder.resolve(fileName)
+    if (!file.exists()) {
+        file.createNewFile()
+    }
+    return file
 }
