@@ -23,6 +23,11 @@ fun main(args: Array<String>) {
                     setUserName(configFile, args[1])
                 } else getUserName(configFile)
             }
+            "add" -> {
+                if (args.size > 1) {
+                    addToIndex(indexFile, workingDirectory, args[1])
+                } else getIndex(indexFile)
+            }
         }
     }
     else println("'${args[0]}' is not a SVCS command.")
@@ -59,4 +64,30 @@ fun getUserName(configFile: File) {
 
 fun setUserName(configFile: File, userName: String){
     configFile.writeText(userName)
+}
+
+fun getIndex(indexFile:File) {
+    val content = indexFile.readLines()
+    if (content.isEmpty()){
+        println("Add a file to the index.")
+    } else {
+        println("Tracked files:")
+        for (filename in content) println(filename)
+    }
+}
+
+fun addToIndex(indexFile: File, workingDirectoryPath: String, fileName: String) {
+    val separator = File.separator
+    if (File(workingDirectoryPath + separator + fileName).exists()) {
+        val indexContent = indexFile.readLines()
+        var fileIsNotInIndex = true
+        for (name in indexContent) {
+            if (name == fileName) fileIsNotInIndex = false
+        }
+        if (fileIsNotInIndex) {
+            if (indexContent.isNotEmpty()) indexFile.appendText("\n")
+            indexFile.appendText(fileName)
+        }
+        println("The file '$fileName' is tracked.")
+    } else println("Can't find '$fileName'")
 }
