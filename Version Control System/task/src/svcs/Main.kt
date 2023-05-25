@@ -10,7 +10,7 @@ fun main(args: Array<String>) {
         "commit" to "     Save changes.",
         "checkout" to "   Restore a file."
     )
-    val workingDirectory = System.getProperty ("user.dir") + File.separator + "Version Control System"
+    val workingDirectory = System.getProperty ("user.dir")
     val vcsFolder = checkFolder(workingDirectory, "vcs")
     val configFile = checkFile(vcsFolder, "config.txt")
     val indexFile = checkFile(vcsFolder, "index.txt")
@@ -64,6 +64,7 @@ fun getUserName(configFile: File) {
 
 fun setUserName(configFile: File, userName: String){
     configFile.writeText(userName)
+    println("The username is $userName.")
 }
 
 fun getIndex(indexFile:File) {
