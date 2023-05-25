@@ -90,5 +90,5 @@ fun addToIndex(indexFile: File, workingDirectoryPath: String, fileName: String) 
             indexFile.appendText(fileName)
         }
         println("The file '$fileName' is tracked.")
-    } else println("Can't find '$fileName'")
+    } else println("Can't find '$fileName'.")
 }
