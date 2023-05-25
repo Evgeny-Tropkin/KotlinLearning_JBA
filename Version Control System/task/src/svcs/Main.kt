@@ -28,6 +28,7 @@ fun main(args: Array<String>) {
                     addToIndex(indexFile, workingDirectory, args[1])
                 } else getIndex(indexFile)
             }
+            else -> println(commands[args[0]])
         }
     }
     else println("'${args[0]}' is not a SVCS command.")
