@@ -10,8 +10,10 @@ fun main(args: Array<String>) {
         "commit" to "     Save changes.",
         "checkout" to "   Restore a file."
     )
+    val separator = File.separator
     val workingDirectory = System.getProperty ("user.dir")
     val vcsFolder = checkFolder(workingDirectory, "vcs")
+    val commitDirectory = checkFolder(workingDirectory + separator + "vcs", "commits")
     val configFile = checkFile(vcsFolder, "config.txt")
     val indexFile = checkFile(vcsFolder, "index.txt")
 
