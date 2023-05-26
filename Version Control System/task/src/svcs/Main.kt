@@ -31,6 +31,7 @@ fun main(args: Array<String>) {
                     addToIndex(indexFile, workingDirectory, args[1])
                 } else getIndex(indexFile)
             }
+            "log" -> getLog(logFile)
             else -> println(commands[args[0]])
         }
     }
@@ -95,4 +96,12 @@ fun addToIndex(indexFile: File, workingDirectoryPath: String, fileName: String) 
         }
         println("The file '$fileName' is tracked.")
     } else println("Can't find '$fileName'.")
+}
+
+fun getLog(logFile: File) {
+    val content = logFile.readLines()
+    if (content.isEmpty()) {
+        println("No commits yet.")
+        return
+    }
 }
