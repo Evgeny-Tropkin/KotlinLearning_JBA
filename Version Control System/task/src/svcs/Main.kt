@@ -16,6 +16,7 @@ fun main(args: Array<String>) {
     val commitDirectory = checkFolder(workingDirectory + separator + "vcs", "commits")
     val configFile = checkFile(vcsFolder, "config.txt")
     val indexFile = checkFile(vcsFolder, "index.txt")
+    val logFile = checkFile(vcsFolder, "log.txt")
 
     if (args.isEmpty() || args[0] == "--help") printHelp(commands)
     else if (args[0] in commands) {
