@@ -32,6 +32,9 @@ fun main(args: Array<String>) {
                 } else getIndex(indexFile)
             }
             "log" -> getLog(logFile)
+            "commit" -> {
+                if (args.size == 1) println("Message was not passed.")
+            }
             else -> println(commands[args[0]])
         }
     }
