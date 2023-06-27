@@ -1,9 +1,19 @@
-type: unsupported
+type: matching
+captions:
+- '&#x27;\n&#x27;'
+- '&#x27;\t&#x27;'
+- '&#x27; &#x27;'
+- '&#x27;\\&#x27;'
+options:
+- new line character
+- backslash character itself
+- space character
+- tab character
 files:
 - name: src/Main.kt
   visible: true
   text: |
-    // This is a matching task. You can use this editor as a playground
+    // You can experiment here, it won’t be checked
 
     fun main(args: Array<String>) {
       // put your code here
@@ -12,3 +22,8 @@ files:
 feedback_link: https://hyperskill.org/learn/step/4684#comment
 status: Solved
 record: -1
+ordering:
+- 0
+- 1
+- 2
+- 3

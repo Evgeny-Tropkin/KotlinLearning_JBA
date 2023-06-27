@@ -3,7 +3,7 @@ hyperskill_project:
   ide_files: https://stepik.org/media/attachments/lesson/526012/additional_files.json
   is_template_based: false
   use_ide: true
-update_date: "Tue, 27 Jun 2023 04:50:50 UTC"
+update_date: "Tue, 27 Jun 2023 16:21:26 UTC"
 stages:
 - id: 909
   step: 13042
@@ -128,6 +128,8 @@ topics:
     theory_id: 4640
   - title: Functions as objects
     theory_id: 5991
+  - title: Lambda expressions
+    theory_id: 30148
   - title: Reading files
     theory_id: 6351
   - title: Writing files
