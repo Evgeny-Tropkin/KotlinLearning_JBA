@@ -1,0 +1,12 @@
+type: code
+files:
+- name: src/Main.kt
+  visible: true
+  text: "fun main() {\n    val dividend: Int = readln().toInt()\n    val divisor:\
+    \ Int = readln().toInt()\n\n    val quotient: Int = dividend.floorDiv()\n    val\
+    \ remainder: Int = dividend.mod() \n\n    print()\n}"
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/22105#comment
+status: Unchecked
+record: -1
+submission_language: kotlin
