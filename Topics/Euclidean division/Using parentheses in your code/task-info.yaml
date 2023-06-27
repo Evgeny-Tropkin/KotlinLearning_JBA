@@ -7,6 +7,9 @@ files:
     \ remainder: Int = dividend.mod() \n\n    print()\n}"
   learner_created: false
 feedback_link: https://hyperskill.org/learn/step/22105#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: <html>Correct solution</html>
+  time: "Tue, 27 Jun 2023 04:58:11 UTC"
 record: -1
 submission_language: kotlin
