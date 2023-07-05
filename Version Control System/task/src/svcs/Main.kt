@@ -34,7 +34,7 @@ fun main(args: Array<String>) {
             "log" -> getLog(logFile)
             "commit" -> {
                 if (args.size == 1) println("Message was not passed.")
-                else commit(args[1], vcsFolder, commitDirectory)
+                else commit(args[1], indexFile, commitDirectory)
             }
             else -> println(commands[args[0]])
         }
@@ -110,14 +110,34 @@ fun getLog(logFile: File) {
     }
 }
 
-fun commit(message: String, folderWithTrackedFiles: File, commitsFolder: File) {
-    val commitHash = getCommitHash(folderWithTrackedFiles)
+fun commit(message: String, index: File, commitsFolder: File) {
+    val commitHash = getCommitHash(index)
     if (haveNotChanges(commitHash)) {
         println("Nothing to commit.")
         return
     }
-    createCommitDirectory(commitHash())
-    copyTrackedFilesToCommitDirectory()
+    createCommitDirectory(commitHash)
+    copyTrackedFilesToCommitDirectory(commitsFolder)
     writeToLog(message)
     println("Changes are committed.")
+}
+
+fun getCommitHash(checkedFolder: File): String {
+    return ""
+}
+
+fun haveNotChanges(commitHash: String): Boolean {
+    return false
+}
+
+fun createCommitDirectory(commitHash: String) {
+    return
+}
+
+fun copyTrackedFilesToCommitDirectory(folderForCommit: File) {
+    return
+}
+
+fun writeToLog(message: String) {
+    return
 }
