@@ -1,6 +1,9 @@
 package svcs
 
 import java.io.File
+import java.security.NoSuchAlgorithmException
+import java.math.BigInteger
+import java.security.MessageDigest
 
 fun main(args: Array<String>) {
     val commands = mapOf(
@@ -122,8 +125,10 @@ fun commit(message: String, index: File, commitsFolder: File) {
     println("Changes are committed.")
 }
 
-fun getCommitHash(checkedFolder: File): String {
-    return ""
+fun getCommitHash(index: File): String {
+    val indexedFiles = getFiles(index)
+    val joinedByteContent = getByteContent(indexedFiles)
+    return hash(joinedByteContent)
 }
 
 fun haveNotChanges(commitHash: String): Boolean {
@@ -140,4 +145,42 @@ fun copyTrackedFilesToCommitDirectory(folderForCommit: File) {
 
 fun writeToLog(message: String) {
     return
+}
+
+fun getFiles(fileWithList: File): MutableList<File> {
+    val content = fileWithList.readLines()
+    val files = mutableListOf<File>()
+    for (path in content) {
+        files.add(File(path))
+    }
+    return files
+}
+
+fun getByteContent(listOfFiles: MutableList<File>): ByteArray {
+    val totalSize = listOfFiles.sumOf { file -> file.length().toInt() }
+    val first = listOfFiles[0].readBytes()
+
+    val dest: ByteArray = first.copyOf(totalSize)
+    var destPos = first.size
+    for (i in 1 until listOfFiles.size) {
+        val array = listOfFiles[i].readBytes()
+        System.arraycopy(array, 0, dest, destPos, array.size)
+        destPos += array.size
+    }
+    return dest
+}
+
+fun hash(bytedContent: ByteArray): String {
+    return try {
+        val md = MessageDigest.getInstance("SHA-256")
+        val messageDigest = md.digest(bytedContent)
+        val no = BigInteger(1, messageDigest)
+        var hashtext = no.toString(16)
+        while (hashtext.length < 32) {
+            hashtext = "0$hashtext"
+        }
+        hashtext
+    } catch (e: NoSuchAlgorithmException) {
+        throw RuntimeException(e)
+    }
 }
