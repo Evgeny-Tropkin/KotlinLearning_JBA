@@ -34,10 +34,12 @@ fun main(args: Array<String>) {
                     addToIndex(indexFile, workingDirectory, args[1])
                 } else getIndex(indexFile)
             }
-            "log" -> getLog(logFile)
+            "log" -> {
+                for (str in getLog(logFile)) println(str)
+            }
             "commit" -> {
                 if (args.size == 1) println("Message was not passed.")
-                else commit(args[1], indexFile, commitDirectory)
+                else commit(args[1], indexFile, commitDirectory, logFile)
             }
             else -> println(commands[args[0]])
         }
@@ -105,17 +107,17 @@ fun addToIndex(indexFile: File, workingDirectoryPath: String, fileName: String) 
     } else println("Can't find '$fileName'.")
 }
 
-fun getLog(logFile: File) {
+fun getLog(logFile: File): List<String> {
     val content = logFile.readLines()
     if (content.isEmpty()) {
-        println("No commits yet.")
-        return
+        return listOf("No commits yet.")
     }
+    return content
 }
 
-fun commit(message: String, index: File, commitsFolder: File) {
+fun commit(message: String, index: File, commitsFolder: File, logFile: File) {
     val commitHash = getCommitHash(index)
-    if (haveNotChanges(commitHash)) {
+    if (haveNotChanges(commitHash, logFile)) {
         println("Nothing to commit.")
         return
     }
@@ -131,7 +133,11 @@ fun getCommitHash(index: File): String {
     return hash(joinedByteContent)
 }
 
-fun haveNotChanges(commitHash: String): Boolean {
+fun haveNotChanges(commitHash: String, logFile: File): Boolean {
+    val log = getLog(logFile)
+    if (log[0].startsWith("commit")){
+        return log[0].split(" ")[1] == commitHash
+    }
     return false
 }
 
