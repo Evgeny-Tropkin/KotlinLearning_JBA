@@ -124,7 +124,7 @@ fun commit(message: String, index: File, commitsFolder: File, logFile: File) {
         return
     }
     val folderForCommit = createCommitDirectory(commitsFolder, commitHash)
-    copyTrackedFilesToCommitDirectory(commitsFolder)
+    copyTrackedFilesToCommitDirectory(folderForCommit, index)
     writeToLog(message)
     println("Changes are committed.")
 }
@@ -153,8 +153,11 @@ fun createCommitDirectory(commitsFolder: File, commitHash: String): File {
     return folder
 }
 
-fun copyTrackedFilesToCommitDirectory(folderForCommit: File) {
-    return
+fun copyTrackedFilesToCommitDirectory(folderForCommit: File, index: File) {
+    val listOfFiles = getFiles(index)
+    for (file in listOfFiles){
+        file.copyTo(folderForCommit)
+    }
 }
 
 fun writeToLog(message: String) {
