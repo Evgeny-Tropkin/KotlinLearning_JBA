@@ -4,6 +4,8 @@ import java.io.File
 import java.security.NoSuchAlgorithmException
 import java.math.BigInteger
 import java.security.MessageDigest
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 fun main(args: Array<String>) {
     val commands = mapOf(
@@ -121,7 +123,7 @@ fun commit(message: String, index: File, commitsFolder: File, logFile: File) {
         println("Nothing to commit.")
         return
     }
-    createCommitDirectory(commitHash)
+    val folderForCommit = createCommitDirectory(commitsFolder, commitHash)
     copyTrackedFilesToCommitDirectory(commitsFolder)
     writeToLog(message)
     println("Changes are committed.")
@@ -141,8 +143,14 @@ fun haveNotChanges(commitHash: String, logFile: File): Boolean {
     return false
 }
 
-fun createCommitDirectory(commitHash: String) {
-    return
+fun createCommitDirectory(commitsFolder: File, commitHash: String): File {
+    val separator = File.separator
+    var folder = File(commitsFolder.toString() + separator + commitHash)
+    if (folder.exists()) {
+        folder = File(folder.toString() + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyy-MM-dd-HH-mm")))
+    }
+    folder.mkdir()
+    return folder
 }
 
 fun copyTrackedFilesToCommitDirectory(folderForCommit: File) {
