@@ -29,7 +29,12 @@ fun main(args: Array<String>) {
             "config" -> {
                 if (args.size > 1) {
                     setUserName(configFile, args[1])
-                } else getUserName(configFile)
+                } else {
+                    val user = getUserName(configFile)
+                    if (user != null) {
+                        println("The username is $user")
+                    }
+                }
             }
             "add" -> {
                 if (args.size > 1) {
@@ -41,7 +46,7 @@ fun main(args: Array<String>) {
             }
             "commit" -> {
                 if (args.size == 1) println("Message was not passed.")
-                else commit(args[1], indexFile, commitDirectory, logFile)
+                else commit(args[1], indexFile, commitDirectory, logFile, configFile)
             }
             else -> println(commands[args[0]])
         }
@@ -71,11 +76,12 @@ fun checkFile(folder: File, fileName:String): File {
     return file
 }
 
-fun getUserName(configFile: File) {
+fun getUserName(configFile: File): String? {
     val content = configFile.readLines()
-    if (content.isEmpty()) {
+    return if (content.isEmpty()) {
         println("Please, tell me who you are.")
-    } else println("The username is ${content[0]}.")
+        null
+    } else content[0]
 }
 
 fun setUserName(configFile: File, userName: String){
@@ -117,15 +123,15 @@ fun getLog(logFile: File): List<String> {
     return content
 }
 
-fun commit(message: String, index: File, commitsFolder: File, logFile: File) {
+fun commit(message: String, index: File, commitsFolder: File, log: File, config: File) {
     val commitHash = getCommitHash(index)
-    if (haveNotChanges(commitHash, logFile)) {
+    if (haveNotChanges(commitHash, log)) {
         println("Nothing to commit.")
         return
     }
     val folderForCommit = createCommitDirectory(commitsFolder, commitHash)
     copyTrackedFilesToCommitDirectory(folderForCommit, index)
-    writeToLog(message)
+    writeToLog(commitHash, getUserName(config), message, log)
     println("Changes are committed.")
 }
 
@@ -160,8 +166,11 @@ fun copyTrackedFilesToCommitDirectory(folderForCommit: File, index: File) {
     }
 }
 
-fun writeToLog(message: String) {
-    return
+fun writeToLog(commit: String, author: String?, message: String, log: File) {
+    val content = log.readLines()
+    val currentCommitLog = "commit $commit\nAuthor: $author\n$message\n"
+    log.writeText(currentCommitLog)
+    log.appendText(content.joinToString("\n"))
 }
 
 fun getFiles(fileWithList: File): MutableList<File> {
