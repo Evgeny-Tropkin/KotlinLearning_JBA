@@ -32,7 +32,7 @@ fun main(args: Array<String>) {
                 } else {
                     val user = getUserName(configFile)
                     if (user != null) {
-                        println("The username is $user")
+                        println("The username is $user.")
                     }
                 }
             }
@@ -95,21 +95,24 @@ fun getIndex(indexFile:File) {
         println("Add a file to the index.")
     } else {
         println("Tracked files:")
-        for (filename in content) println(filename)
+        for (filename in content) {
+            println(File(filename).name)
+        }
     }
 }
 
 fun addToIndex(indexFile: File, workingDirectoryPath: String, fileName: String) {
     val separator = File.separator
-    if (File(workingDirectoryPath + separator + fileName).exists()) {
+    val path = workingDirectoryPath + separator + fileName
+    if (File(path).exists()) {
         val indexContent = indexFile.readLines()
         var fileIsNotInIndex = true
         for (name in indexContent) {
-            if (name == fileName) fileIsNotInIndex = false
+            if (name == path) fileIsNotInIndex = false
         }
         if (fileIsNotInIndex) {
             if (indexContent.isNotEmpty()) indexFile.appendText("\n")
-            indexFile.appendText(fileName)
+            indexFile.appendText(path)
         }
         println("The file '$fileName' is tracked.")
     } else println("Can't find '$fileName'.")
@@ -150,25 +153,24 @@ fun haveNotChanges(commitHash: String, logFile: File): Boolean {
 }
 
 fun createCommitDirectory(commitsFolder: File, commitHash: String): File {
-    val separator = File.separator
-    var folder = File(commitsFolder.toString() + separator + commitHash)
+    var folderName = commitHash
+    val folder = commitsFolder.resolve(commitHash)
     if (folder.exists()) {
-        folder = File(folder.toString() + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyy-MM-dd-HH-mm")))
+        folderName += "_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyy-MM-dd-HH-mm"))
     }
-    folder.mkdir()
-    return folder
+    return checkFolder(commitsFolder.absolutePath, folderName)
 }
 
 fun copyTrackedFilesToCommitDirectory(folderForCommit: File, index: File) {
     val listOfFiles = getFiles(index)
     for (file in listOfFiles){
-        file.copyTo(folderForCommit)
+        file.copyTo(folderForCommit.resolve(file.name))
     }
 }
 
 fun writeToLog(commit: String, author: String?, message: String, log: File) {
     val content = log.readLines()
-    val currentCommitLog = "commit $commit\nAuthor: $author\n$message\n"
+    val currentCommitLog = "commit $commit\nAuthor: $author\n$message\n\n"
     log.writeText(currentCommitLog)
     log.appendText(content.joinToString("\n"))
 }
