@@ -48,6 +48,10 @@ fun main(args: Array<String>) {
                 if (args.size == 1) println("Message was not passed.")
                 else commit(args[1], indexFile, commitDirectory, logFile, configFile)
             }
+            "checkout" -> {
+                if (args.size == 1) println("Commit id was not passed.")
+                else checkout(args[1], indexFile, logFile)
+            }
             else -> println(commands[args[0]])
         }
     }
@@ -211,4 +215,8 @@ fun hash(bytedContent: ByteArray): String {
     } catch (e: NoSuchAlgorithmException) {
         throw RuntimeException(e)
     }
+}
+
+fun checkout(commit: String, index: File, log: File) {
+
 }
