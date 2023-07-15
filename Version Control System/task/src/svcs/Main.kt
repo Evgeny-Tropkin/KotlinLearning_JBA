@@ -50,7 +50,7 @@ fun main(args: Array<String>) {
             }
             "checkout" -> {
                 if (args.size == 1) println("Commit id was not passed.")
-                else checkout(args[1], indexFile, logFile)
+                else checkout(args[1], indexFile, logFile, commitDirectory)
             }
             else -> println(commands[args[0]])
         }
@@ -217,6 +217,11 @@ fun hash(bytedContent: ByteArray): String {
     }
 }
 
-fun checkout(commit: String, index: File, log: File) {
+fun checkout(commit: String, index: File, log: File, commitsDirectory: File) {
+    val commitInfo = findCommitInLog(commit, log)
+    if (commitInfo == null) println("Commit does not exist.")
+}
 
+fun findCommitInLog(commit: String, log: File): MutableList<String>? {
+    return null
 }
