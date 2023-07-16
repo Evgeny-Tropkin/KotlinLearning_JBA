@@ -219,9 +219,27 @@ fun hash(bytedContent: ByteArray): String {
 
 fun checkout(commit: String, index: File, log: File, commitsDirectory: File) {
     val commitInfo = findCommitInLog(commit, log)
-    if (commitInfo == null) println("Commit does not exist.")
+    if (commitInfo.isEmpty()) println("Commit does not exist.")
+    else {
+        copyFilesToWorkingDirectory(commitInfo[0], commitsDirectory, index)
+    }
 }
 
-fun findCommitInLog(commit: String, log: File): MutableList<String>? {
-    return null
+fun findCommitInLog(commit: String, log: File): MutableList<String> {
+    val content = log.readLines()
+    var res = mutableListOf<String>()
+
+    for (i in content.indices) {
+        if (content[i].startsWith("commit")) {
+            if (content[i].substring(7).startsWith(commit)) {
+                res = mutableListOf(content[i], content[i + 1], content[i + 2])
+                break
+            }
+        }
+    }
+    return res
+}
+
+fun copyFilesToWorkingDirectory(hash: String, commitsFolder: File, index: File) {
+    return
 }
