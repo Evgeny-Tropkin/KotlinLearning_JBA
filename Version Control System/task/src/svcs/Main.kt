@@ -231,8 +231,9 @@ fun findCommitInLog(commit: String, log: File): MutableList<String> {
 
     for (i in content.indices) {
         if (content[i].startsWith("commit")) {
-            if (content[i].substring(7).startsWith(commit)) {
-                res = mutableListOf(content[i], content[i + 1], content[i + 2])
+            val hash = content[i].substring(7)
+            if (hash.startsWith(commit)) {
+                res = mutableListOf(hash, content[i + 1], content[i + 2])
                 break
             }
         }
@@ -241,5 +242,19 @@ fun findCommitInLog(commit: String, log: File): MutableList<String> {
 }
 
 fun copyFilesToWorkingDirectory(hash: String, commitsFolder: File, index: File) {
-    return
+    val files = index.readLines()
+    val commitFolder = commitsFolder.resolve(hash)
+    val commitedFiles = commitFolder.listFiles()?.toMutableList()
+    for (path in files) {
+        if (commitedFiles != null && commitedFiles.isEmpty().not()) {
+            for (file in commitedFiles) {
+                if (File(path).name == file.name) {
+                    file.copyTo(File(path), true)
+                    commitedFiles.remove(file)
+                    break
+                }
+            }
+        }
+    }
+    if (commitFolder.exists()) println("Switched to commit $hash.")
 }
